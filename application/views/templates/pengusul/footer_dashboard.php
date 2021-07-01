@@ -246,42 +246,42 @@
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Subtes 1',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Stabilitas Emosi',
 			})
 			return false;
 		} else if (total_cek_subtes2 < subtes2) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Subtes 2',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Pengendalian Diri',
 			})
 			return false;
 		} else if (total_cek_subtes3 < subtes3) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Subtes 3',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Penyesuaian Diri',
 			})
 			return false;
 		} else if (total_cek_subtes4 < subtes4) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Subtes 4',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Ketahanan',
 			})
 			return false;
 		} else if (total_cek_subtes5 < subtes5) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Subtes 5',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Kecermatan',
 			})
 			return false;
 		} else if (total_cek_subtes6 < subtes6) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Subtes 6',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Konsentrasi',
 			})
 			return false;
 		} else {
@@ -405,7 +405,7 @@
 			},
 			dataType: "JSON",
 			success: function(data) {
-				console.log(data);
+				// console.log(data);
 				$('#biaya_bayar').html(data.biaya);
 			},
 			error: function(data) {

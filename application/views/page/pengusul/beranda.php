@@ -5,8 +5,8 @@
 	<div class="u-carousel-inner" role="listbox">
 		<div class="skrollable skrollable-between u-active u-align-center u-carousel-item u-clearfix u-image u-parallax u-shading u-section-1-1" src="" data-image-width="5443" data-image-height="3629">
 			<div class="u-clearfix u-sheet u-sheet-1">
-				<h2 class="u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xs u-text u-text-1">SINERGI SIM </h2>
-				<img src="<?= 'assets/pengusul/' ?>img/logo1.png" alt="" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="700" data-image-height="700">
+				<h3 class="u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xs u-text u-text-1" style="width: 310px !important;">Psikologi SIM Online</h3>
+				<img src="<?= 'assets/pengusul/' ?>img/logo1.png" alt="" style="margin-top: -55px !important;" class="u-image u-image-default u-preserve-proportions u-image-1" data-image-width="700" data-image-height="700">
 				<h1 class="u-text u-text-2">PSIKOTES - SIM</h1>
 				<h4 class="typewrite mt-3" data-period="2000" data-type='[ "Layanan ujian PSIKOTES SIM berbasis online", "Klik DAFTAR SEKARANG untuk memulai ujian PSIKOTES SIM" ]'>
 					<span class="wrap"></span>
@@ -381,7 +381,7 @@
 							<textarea class="form-control" rows="3" placeholder="Alamat" id="alamat" name="alamat"></textarea>
 						</div>
 					</div>
-					<div class="col-lg-6 col-sm-12" >
+					<div class="col-lg-6 col-sm-12">
 						<div class="form-group">
 							<label class="float-left">Pilih Provinsi :</label>
 							<select class="form-control" id="provinsi" onchange="listKabupaten()" name="provinsi">

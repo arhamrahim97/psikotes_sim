@@ -39,7 +39,11 @@
 <body id="body" style="background-color: white;">
 	<div id="content">
 		<div style="position: absolute; z-index: -1000;  left: 0px; top: 0px; right: 0px; bottom: 0px; ">
-			<img class="mx-auto d-block" src="<?= base_url('./assets/pengusul/img/sertifikat.jpg') ?>" style="width: 100%; ">
+			<?php if ($tipe_soal == 'A') : ?>
+				<img class="mx-auto d-block" src="<?= base_url('./assets/pengusul/img/sertifikat.jpg') ?>" style="width: 100%; ">
+			<?php else : ?>
+				<img class="mx-auto d-block" src="<?= base_url('./assets/pengusul/img/sertifikat_B.jpg') ?>" style="width: 100%; ">
+			<?php endif; ?>
 			<div style="float: left; margin-left: 100px !important; position: relative; top: -32px;">
 				<p class="" style="font-size: 18px;"><i>Hasil ini hanya berlaku jika ada tanda tangan dari Psikolog. </i> </p>
 			</div>
@@ -53,7 +57,6 @@
 
 					<div class="row">
 						<div class="col" style="display: inline;">
-
 							<img src="<?= base_url('./assets/pengusul/img/logo2.png') ?>" alt="" width="70px" style="margin-right: 5px; margin-top: -75px">
 
 							<div style="display: inline-block;">
@@ -212,10 +215,17 @@
 						<div class="col-5" style="font-size: 26px;">
 							<p>Palu, <?= strftime("%d %B %Y", strtotime(date('Y-m-d'))) ?></p>
 							<p style="margin-top: -20px;">Psikolog,</p>
-							<img style="margin-top: -15px; margin-bottom: -15px;" src="<?= base_url('./assets/pengusul/img/ttd.png') ?>" alt="" width="100px">
-							<p><b>Sigit Apriadi, S.Psi</b></p>
-							<hr style="border: 1px solid black; background-color: black; width: 190px; background: black; margin-top: -17px;">
-							<p style="margin-top: -20px;"><b>SIPP : 0001-17-1-3</b></p>
+							<?php if ($tipe_soal == 'A') : ?>
+								<img style="margin-top: -30px; margin-bottom: -25px;" src="<?= base_url('./assets/pengusul/img/ttd.png') ?>" alt="" width="100px">
+								<p><b>Sigit Apriadi, S.Psi</b></p>
+								<hr style="border: 1px solid black; background-color: black; width: 190px; background: black; margin-top: -17px;">
+								<p style="margin-top: -20px;"><b>SIPP : 0001-17-1-3</b></p>
+							<?php else : ?>
+								<img style="margin-top: -30px; margin-bottom: -25px;" src="<?= base_url('./assets/pengusul/img/ttd2.png') ?>" alt="" width="100px">
+								<p><b>Octaviani E. Balebu, S.Psi.,M. Psi</b></p>
+								<hr style="border: 1px solid black; background-color: black; width: 190px; background: black; margin-top: -17px;">
+								<p style="margin-top: -20px;"><b>SIPP : 0004-19-2-2</b></p>
+							<?php endif; ?>
 						</div>
 					</div>
 

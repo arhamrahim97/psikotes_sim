@@ -266,7 +266,11 @@ class PengusulController extends CI_Controller
 			$id = $query->maxKode;
 			$urutan = (int) substr($id, 4, 5);
 			$urutan++;
-			$kode = sprintf("%05s", $urutan) . '/BIPI-SNG/' . $bln . '/' . date('Y');
+			if ($ujian->tipe_soal == 'A') {
+				$kode = sprintf("%05s", $urutan) . '/BAPI-SIM/' . $bln . '/' . date('Y');
+			} else if ($ujian->tipe_soal == 'B') {
+				$kode = sprintf("%05s", $urutan) . '/SNG-SIM/' . $bln . '/' . date('Y');
+			}
 			// $kode = 'test';
 			$dataSertifikat = array(
 				'id_sertifikat' => $id_sertifikat,
