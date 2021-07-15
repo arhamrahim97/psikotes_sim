@@ -89,6 +89,55 @@ class MasterController extends CI_Controller
         }
     }
 
+    public function changeActiveBank()
+    {
+        $id = $this->input->post('id');
+        $aktif = $this->input->post('aktif');
+        $set_status_bank = null;
+
+        if ($aktif == 1) {
+            $set_status_bank = 0;
+        } else {
+            $set_status_bank = 1;
+        }
+
+        $data = [
+            'aktif' => $set_status_bank
+        ];
+
+        $this->db->where('id', $id);
+        $this->db->update('bank', $data);
+    }
+
+    public function getBiayaProvinsi()
+    {
+        $biayaProvinsi = $this->db->get('wilayah_provinsi')->result();
+        echo json_encode($biayaProvinsi);
+    }
+
+    public function getEditBiayaProvinsi()
+    {
+        $id = $this->input->post('id');
+        $this->db->where('id', $id);
+        $biayaProvinsi = $this->db->get('wilayah_provinsi')->row();
+        echo json_encode($biayaProvinsi);
+    }
+
+    public function updateBiayaProvinsi()
+    {
+        $id = $this->input->post('id');
+        $biaya = $this->input->post('biaya');
+        $data = [
+            'biaya' => $biaya
+        ];
+        $this->db->where('id', $id);
+        if ($this->db->update('wilayah_provinsi', $data)) {
+            echo "true";
+        } else {
+            echo "false";
+        }
+    }
+
     // Biaya
     public function getBiaya()
     {

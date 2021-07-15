@@ -9,7 +9,7 @@
 				<div class="card-body">
 					<h5 class="mb-3"><i class="fas fa-credit-card"></i> Daftar Nomor Rekening Transfer</h5>
 					<div class="alert alert-light">
-						<p class="mb-0">Transfer sejumlah <b id="biaya_bayar"></b> di salah satu rekening berikut, dan jangan lupa untuk foto / screenshot bukti transferannya.</p>
+						<p class="mb-0">Transfer sejumlah <b id="biaya_bayar"></b> di salah satu rekening berikut, dan jangan lupa untuk foto / screenshot bukti transferannya. <b>Harap bayar sesuai Nominal dengan 3 digit dibelakang yang bersifat unik</b></p>
 					</div>
 					<?php foreach ($bank as $b) { ?>
 						<blockquote class="quote-primary ">

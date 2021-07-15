@@ -373,8 +373,8 @@
 						</div>
 						<div class="form-group" style="margin-top: 24px;">
 							<label class="float-left" style="margin-bottom: 4px;">Email :</label>
-							<input class="form-control emailPengusul" type="email" placeholder="Masukkan Email" id="email" name="email">
-							<small style="float: left; color: #478ac9; margin-top: 2px; font-weight: bold; display: none;" id="smallEmail"><i> Contoh : iniemail@gmail.com</i></small>
+							<input class="form-control emailPengusul" type="email" placeholder="Masukkan Email (Tidak Wajib)" id="email" name="email">
+							<small style="float: left; color: #478ac9; margin-top: 2px; font-weight: bold; display: none;" id="smallEmail"><i> Contoh : iniemail@gmail.com (email tidak wajib / boleh dikosongkan)</i></small>
 						</div>
 						<div class="form-group" style="margin-top: 24px;">
 							<label class="float-left" style="margin-bottom: 4px;">Alamat :</label>
@@ -413,13 +413,14 @@
 						<div class="form-group" style="margin-top: 24px;">
 							<label class="float-left">Password :</label>
 							<input class="form-control" type="text" placeholder="Password" id="password" name="password_daftar" maxlength="256">
+							<small style="float: left; color: #478ac9; margin-top: 2px; font-weight: bold; display: none;" id="smallPassword"><i> Panjang password minimal 6 karakter</i></small>
 						</div>
 						<div class="form-group" style="margin-top: 24px;">
 							<label class="float-left">Upload Foto KTP :</label>
 							<br>
 							<input type="file" class="form-control-file float-right" id="foto_ktp" accept="image/x-png,image/gif,image/jpeg" name="file">
 							<br>
-							<small id="emailHelp" class="form-text text-muted float-left">Foto KTP Maximal Berukuran 2 MB</small>
+							<small id="emailHelp" class="form-text text-muted float-left">Foto KTP Maximal Berukuran 10 MB</small>
 						</div>
 					</div>
 				</div>

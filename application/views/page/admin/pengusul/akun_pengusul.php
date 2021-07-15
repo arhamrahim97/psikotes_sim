@@ -355,11 +355,11 @@
 				text: 'Foto Tidak Boleh Kosong',
 			})
 			return false;
-		} else if (foto_ktp.size > 2097152) {
+		} else if (foto_ktp.size > 10485760) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Periksa Kembali Data Anda',
-				text: 'Ukuran Foto KTP Tidak Boleh Lebih dari 2 MB',
+				text: 'Ukuran Foto KTP Tidak Boleh Lebih dari 10 MB',
 			})
 			return false;
 		} else {

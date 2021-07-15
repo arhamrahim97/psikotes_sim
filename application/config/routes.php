@@ -117,6 +117,10 @@ $route['standarKelulusan'] = 'SoalController/standarKelulusan';
 $route['getStandarKelulusan'] = 'SoalController/getStandarKelulusan';
 $route['updateStandarKelulusan'] = 'SoalController/updateStandarKelulusan';
 
+$route['pengaturanSoal'] = 'SoalController/pengaturanSoal';
+$route['updateBlokirSoalA'] = 'SoalController/updateBlokirSoalA';
+$route['updateBlokirSoalB'] = 'SoalController/updateBlokirSoalB';
+
 // Adminstrasi
 $route['administrasi'] = 'MasterController/administrasi';
 $route['insertBank'] = 'MasterController/insertBank';
@@ -124,6 +128,12 @@ $route['getBank'] = 'MasterController/getBank';
 $route['hapusBank'] = 'MasterController/hapusBank';
 $route['getEditBank'] = 'MasterController/getEditBank';
 $route['editBank'] = 'MasterController/editBank';
+
+$route['getBiayaProvinsi'] = 'MasterController/getBiayaProvinsi';
+$route['getEditBiayaProvinsi'] = 'MasterController/getEditBiayaProvinsi';
+$route['updateBiayaProvinsi'] = 'MasterController/updateBiayaProvinsi';
+
+$route['changeActiveBank'] = 'MasterController/changeActiveBank';
 
 $route['getBiaya'] = 'MasterController/getBiaya';
 $route['updateBiaya'] = 'MasterController/updateBiaya';

@@ -82,6 +82,7 @@
 								<th>No.</th>
 								<th>Nama Bank</th>
 								<th>No Rekening</th>
+								<th>Aktif</th>
 								<th>Aksi</th>
 							</tr>
 						</thead>
@@ -100,11 +101,11 @@
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">Biaya</h6>
-					<div class="dropdown no-arrow">
+					<!-- <div class="dropdown no-arrow">
 						<button type="button" class="btn btn-primary" data-toggle="modal" id="btnBiaya">
 							<i class="fas fa-pencil-alt"></i>
 						</button>
-					</div>
+					</div> -->
 					<!-- Modal Tambah-->
 					<div class="modal fade" id="modalBiaya" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<form method="POST">
@@ -118,8 +119,13 @@
 									</div>
 									<div class="modal-body">
 										<div class="form-group">
+											<label for="tahun">Provinsi</label>
+											<input type="text" class="form-control" id="provinsi" disabled>
+										</div>
+										<div class="form-group">
 											<label for="tahun">Biaya</label>
-											<input type="text" class="form-control" id="biaya" placeholder="Masukkan Biaya" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
+											<input type="text" id="idBiaya" hidden>
+											<input type="text" class="form-control" id="biaya" placeholder="Masukkan Biaya" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onchange="maskBiaya()">
 										</div>
 									</div>
 
@@ -134,13 +140,24 @@
 				</div>
 				<!-- Card Body -->
 				<div class="card-body">
-					<p>Biaya Administrasi Untuk Tes Psikologi Saat Ini Adalah : <b>Rp. <?= number_format($biaya, 0, ',', '.') ?></b></p>
+					<table id="tabelBiaya" class="table table-striped table-bordered" style="width:100%">
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>Provinsi</th>
+								<th>Biaya</th>
+								<th>Aksi</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 <script>
 	// Datatables
 	$(document).ready(function() {
@@ -164,19 +181,87 @@
 					data: 'no_rekening'
 				},
 				{
+					data: "aktif",
+					render: function(data, type, row) {
+						if (type === 'display') {
+							return '<label class="switch"> <input id="change_blocked" type="checkbox"><span class="slider round"></span></label>';
+
+						}
+						return data;
+					},
+					className: "dt-body-center"
+				},
+				{
 					data: 'id',
 					render: function(data, type, row, meta) {
 						return '<button class="btn btn-info btn-sm" onclick="edit(' + data + ')">' + 'Edit' + '</button>  <button class="btn btn-danger btn-sm" onclick="hapus(' + data + ')">' + 'Hapus' + '</button>';
 					}
 				}
-			]
+			],
+			"rowCallback": function(row, data) {
+				$('#change_blocked', row).prop('checked', data.aktif == 1);
+				$('#change_blocked', row).click(function() {
+					change_block_bank(data.id, data.aktif);
+					refreshTable();
+				});
+			},
+		})
+
+		$("#tabelBiaya").DataTable({
+			ajax: {
+				url: '<?php echo base_url('getBiayaProvinsi') ?>',
+				dataSrc: ''
+			},
+			scrollX: true,
+
+			columns: [{
+					data: 'id',
+					render: function(data, type, row, meta) {
+						return meta.row + meta.settings._iDisplayStart + 1;
+					}
+				},
+				{
+					data: 'nama'
+				},
+				{
+					data: 'biaya',
+					render: $.fn.dataTable.render.number('.')
+				},
+				{
+					data: 'id',
+					render: function(data, type, row, meta) {
+						return '<button class="btn btn-info btn-sm" onclick="editBiaya(' + data + ')">' + 'Edit Biaya' + '</button>';
+					}
+				}
+			],
 		})
 	})
+
+	function change_block_bank(id, aktif) {
+		console.log(aktif);
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo site_url("changeActiveBank"); ?>',
+			data: {
+				id: id,
+				aktif: aktif
+			},
+			cache: false,
+			success: function(data) {},
+			error: function(e) {},
+			complete: function() {}
+		});
+	}
 
 	// Refresh Table
 	function refreshTable() {
 		var table = $("#tabel").DataTable();
 		table.ajax.reload();
+	}
+
+	function refreshTableBiaya() {
+		var tableBiaya = $("#tabelBiaya").DataTable();
+		tableBiaya.ajax.reload();
 	}
 
 	// Update Ajax
@@ -343,23 +428,36 @@
 				})
 			}
 		})
-
 	}
 
-	$("#btnBiaya").click(function() {
+	// Ambil Update Ajax
+	function editBiaya(id) {
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo base_url('getBiaya') ?>',
+			url: '<?php echo base_url('getEditBiayaProvinsi') ?>',
 			dataType: "JSON",
+			data: {
+				id: id
+			},
 			success: function(data) {
-				$("#biaya").val(data.nilai);
+				$("#biaya").val(data.biaya);
+				$("#idBiaya").val(data.id);
+				$("#provinsi").val(data.nama);
+				maskBiaya();
 			}
 		})
 		$("#modalBiaya").modal('show');
-	})
+	}
+
+	function maskBiaya() {
+		$('#biaya').mask('000.000.000.000.000', {
+			reverse: true
+		});
+	}
 
 	$("#btnUpdateBiaya").click(function() {
-		var biaya = $("#biaya").val();
+		var biaya = $("#biaya").val().replaceAll('.', '');
+		var id = $('#idBiaya').val();
 		if (biaya == "") {
 			Swal.fire({
 				icon: 'error',
@@ -369,8 +467,9 @@
 		} else {
 			$.ajax({
 				type: 'POST',
-				url: '<?php echo base_url('updateBiaya') ?>',
+				url: '<?php echo base_url('updateBiayaProvinsi') ?>',
 				data: {
+					id: id,
 					biaya: biaya
 				},
 				success: function(data) {
@@ -381,7 +480,7 @@
 							text: 'Biaya Berhasil Diupdate',
 						})
 						$("#modalBiaya").modal('hide');
-						location.reload();
+						refreshTableBiaya();
 					} else {
 						Swal.fire({
 							icon: 'error',

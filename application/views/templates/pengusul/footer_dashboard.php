@@ -18,12 +18,22 @@
 <script type="text/javascript" src="<?= 'assets/pengusul/admin-lte/' ?>js/demo.js"></script>
 
 <script>
+	if (window.history.replaceState) {
+		window.history.replaceState(null, null, window.location.href);
+	}
+</script>
+<script>
 	// $('a[target="_blank"]').removeAttr('target');
 	$(document).ready(function() {
 		getListUjian();
 		$('.tglLahir').mask('00/00/0000');
-
+		biayaHasil();
 	})
+
+	function biayaHasil() {
+		var biayaHasil = $('#biayaHasil').html().split('.');
+		$('#biayaHasil').html(biayaHasil[0] + "." + biayaHasil[1] + "." + "<span style='color:red'>" + biayaHasil[2] + "</span>");
+	}
 
 	$('.nomorKTP').click(function() {
 		if ($(this).val().length == 16) {
@@ -157,7 +167,7 @@
 						},
 						dataType: 'json',
 						success: function(data) {
-							console.log(data['error']);
+							console.log(jenis_sim);
 							if (data['error'] == "ujian_sudah_ada") {
 								Swal.fire({
 									icon: 'error',
@@ -246,42 +256,42 @@
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Di Sub Soal Stabilitas Emosi',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Kategori 1',
 			})
 			return false;
 		} else if (total_cek_subtes2 < subtes2) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Di Sub Soal Pengendalian Diri',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Kategori 2',
 			})
 			return false;
 		} else if (total_cek_subtes3 < subtes3) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Di Sub Soal Penyesuaian Diri',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Kategori 3',
 			})
 			return false;
 		} else if (total_cek_subtes4 < subtes4) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Di Sub Soal Ketahanan',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Kategori 4',
 			})
 			return false;
 		} else if (total_cek_subtes5 < subtes5) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Di Sub Soal Kecermatan',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Kategori 5',
 			})
 			return false;
 		} else if (total_cek_subtes6 < subtes6) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Terjadi Kesalahan',
-				text: 'Periksa Kembali Jawaban Di Sub Soal Konsentrasi',
+				text: 'Periksa Kembali Jawaban Di Sub Soal Kategori 6',
 			})
 			return false;
 		} else {
@@ -336,19 +346,22 @@
 			},
 			dataType: "JSON",
 			success: function(data) {
+				var biaya = data.biaya.split('.');
+				$('#biaya').html(biaya[0] + "." + biaya[1] + "." + "<span style='color:red'>" + biaya[2] + "</span>");
 				$('#judul_no_ujian').html(data.no_ujian);
 				$('#no_ujian').html(data.no_ujian);
 				$('#tanggal_ujian').html(data.created_at);
 				$('#tipe_soal').html(data.tipe_soal);
 				$('#tipe_sim').html(data.jenis_sim);
 				$('#status_hasil').html(data.status_hasil);
-				$('#biaya').html(data.biaya);
 				$('#status_bayar').html(data.status_bayar);
 				$('#alasan_ditolak').html(data.alasan_ditolak);
 				if (data.status_bayar == 'Ditolak') {
 					$('#alasan_ditolak2').show()
 					$('#proses-pembayaran').show()
-
+				}
+				if (data.status_bayar == 'Belum Bayar') {
+					$('#aksi_bayar').show();
 				}
 
 			},
@@ -358,6 +371,7 @@
 
 		})
 	}
+
 
 	$('#konfirmasi_ujian').click(function() {
 		Swal.fire({
@@ -406,7 +420,9 @@
 			dataType: "JSON",
 			success: function(data) {
 				// console.log(data);
-				$('#biaya_bayar').html(data.biaya);
+				var biaya = data.biaya.split('.');
+				$('#biaya_bayar').html(biaya[0] + "." + biaya[1] + "." + "<span style='color:red'>" + biaya[2] + "</span>");
+				// $('#biaya_bayar').html(data.biaya);
 			},
 			error: function(data) {
 				console.log(data);
@@ -433,11 +449,11 @@
 				text: 'Foto Bukti Tidak Boleh Dikosongkan',
 			})
 			return false;
-		} else if (foto_bukti.size > 2097152) {
+		} else if (foto_bukti.size > 10485760) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Periksa Kembali Data Anda',
-				text: 'Ukuran Foto Bukti Tidak Boleh Lebih dari 2 MB',
+				text: 'Ukuran Foto Bukti Tidak Boleh Lebih dari 10 MB',
 			})
 			return false;
 		} else {

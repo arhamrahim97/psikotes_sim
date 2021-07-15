@@ -170,6 +170,11 @@
 <script src="<?= 'assets/' ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= "assets/" ?>js/select2.min.js"></script>
 <script>
+	if (window.history.replaceState) {
+		window.history.replaceState(null, null, window.location.href);
+	}
+</script>
+<script>
 	$(document).ready(function() {
 		$('.tglLahir').mask('00/00/0000');
 		$('.noHP').mask('000000000000');
@@ -245,6 +250,14 @@
 			$('#smallNoHP').hide()
 		} else {
 			$('#smallNoHP').show()
+		}
+	})
+
+	$('#password').keyup(function() {
+		if ($(this).val().length >= 6) {
+			$('#smallPassword').hide()
+		} else {
+			$('#smallPassword').show()
 		}
 	})
 
@@ -467,6 +480,13 @@
 				text: 'Password Tidak Boleh Dikosongkan',
 			})
 			return false;
+		} else if (password.length < 6) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Periksa Kembali Data Anda',
+				text: 'Password Tidak Boleh Kurang dari 6 Karakter',
+			})
+			return false;
 		} else if (!foto_ktp) {
 			Swal.fire({
 				icon: 'error',
@@ -474,11 +494,11 @@
 				text: 'Foto KTP Tidak Boleh Dikosongkan',
 			})
 			return false;
-		} else if (foto_ktp.size > 2097152) {
+		} else if (foto_ktp.size > 10485760) {
 			Swal.fire({
 				icon: 'error',
 				title: 'Periksa Kembali Data Anda',
-				text: 'Ukuran Foto KTP Tidak Boleh Lebih dari 2 MB',
+				text: 'Ukuran Foto KTP Tidak Boleh Lebih dari 10 MB',
 			})
 			return false;
 		} else {

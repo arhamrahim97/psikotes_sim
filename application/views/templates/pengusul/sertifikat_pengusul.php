@@ -216,12 +216,14 @@
 							<p>Palu, <?= strftime("%d %B %Y", strtotime(date('Y-m-d'))) ?></p>
 							<p style="margin-top: -20px;">Psikolog,</p>
 							<?php if ($tipe_soal == 'A') : ?>
-								<img style="margin-top: -30px; margin-bottom: -25px;" src="<?= base_url('./assets/pengusul/img/ttd.png') ?>" alt="" width="100px">
+								<img style="margin-left: -100px; margin-top: -30px; margin-bottom: -25px;" src="<?= base_url('./assets/pengusul/img/ttd.png') ?>" alt="" width="100px">
+								<img style="margin-left: -180px; margin-right: -30px; margin-top: -45px; margin-bottom: -25px; " src="<?= base_url('./assets/pengusul/img/logo_biro.png') ?>" alt="" width="110px">
 								<p><b>Sigit Apriadi, S.Psi</b></p>
 								<hr style="border: 1px solid black; background-color: black; width: 190px; background: black; margin-top: -17px;">
 								<p style="margin-top: -20px;"><b>SIPP : 0001-17-1-3</b></p>
 							<?php else : ?>
-								<img style="margin-top: -30px; margin-bottom: -25px;" src="<?= base_url('./assets/pengusul/img/ttd2.png') ?>" alt="" width="100px">
+								<img style="margin-left: -150px;margin-top: -30px; margin-bottom: -25px;" src="<?= base_url('./assets/pengusul/img/ttd2.png') ?>" alt="" width="100px">
+								<img style="margin-left: -220px; margin-right: -100px; margin-top: -45px; margin-bottom: -25px;" src="<?= base_url('./assets/pengusul/img/logo_sinergi.png') ?>" alt="" width="150px">
 								<p><b>Octaviani E. Balebu, S.Psi.,M. Psi</b></p>
 								<hr style="border: 1px solid black; background-color: black; width: 190px; background: black; margin-top: -17px;">
 								<p style="margin-top: -20px;"><b>SIPP : 0004-19-2-2</b></p>

@@ -44,6 +44,8 @@ class DashboardPengusulController extends CI_Controller
 			'title' => 'Ujian',
 			'profil' => $profil
 		];
+		$data['blokirSoalA'] = $this->db->where('id', 8)->get('pengaturan')->row()->nilai;
+		$data['blokirSoalB'] = $this->db->where('id', 9)->get('pengaturan')->row()->nilai;
 		$this->load->view('templates/pengusul/header_dashboard', $data);
 		$this->load->view('page/pengusul/ujian');
 		$this->load->view('templates/pengusul/footer_dashboard');
@@ -54,8 +56,8 @@ class DashboardPengusulController extends CI_Controller
 		$id = $this->session->userdata('id');
 		$profil = $this->db->where('id_user', $id)->get('profil')->row();
 		$standar_kelulusan = $this->db->where('nama', 'standar_kelulusan')->get('pengaturan')->row()->nilai;
-		$biaya = $this->db->where('nama', 'biaya')->get('pengaturan')->row()->nilai;
-		$bank = $this->db->order_by('nama_bank', 'asc')->get('bank')->result();
+		$biaya = $this->db->where('id', $profil->provinsi)->get('wilayah_provinsi')->row()->biaya;
+		$bank = $this->db->where('aktif', 1)->order_by('nama_bank', 'asc')->get('bank')->result();
 		$tipe_soal = $this->input->post('tipe_soal');
 		$tipe_sim = $this->input->post('tipe_sim');
 
@@ -286,7 +288,7 @@ class DashboardPengusulController extends CI_Controller
 
 	public function pembayaran()
 	{
-		$bank = $this->db->order_by('nama_bank', 'asc')->get('bank')->result();
+		$bank = $this->db->where('aktif', 1)->order_by('nama_bank', 'asc')->get('bank')->result();
 		$id = $this->session->userdata('id');
 		$profil = $this->db->where('id_user', $id)->get('profil')->row();
 		$data = [
@@ -409,8 +411,21 @@ class DashboardPengusulController extends CI_Controller
 
 		$this->db->where('jenis_sim', $tipe_sim);
 		$this->db->where('status_bayar', 'Belum Bayar');
+		// $this->db->or_where('status_bayar', 'Menunggu Konfirmasi');
 		$this->db->where('id_user', $this->session->userdata('id'));
-		$this->db->or_where('status_bayar', 'Menunggu Konfirmasi');
+		$riwayat_ujian = $this->db->get('riwayat_ujian')->num_rows();
+		if ($riwayat_ujian > 0) {
+			$error = array(
+				'error' => 'ujian_sudah_ada'
+			);
+			echo json_encode($error);
+			die;
+		}
+
+		$this->db->where('jenis_sim', $tipe_sim);
+		// $this->db->where('status_bayar', 'Belum Bayar');
+		$this->db->where('status_bayar', 'Menunggu Konfirmasi');
+		$this->db->where('id_user', $this->session->userdata('id'));
 		$riwayat_ujian = $this->db->get('riwayat_ujian')->num_rows();
 		if ($riwayat_ujian > 0) {
 			$error = array(
@@ -425,7 +440,7 @@ class DashboardPengusulController extends CI_Controller
         			<input type="text" name="tipe_soal" value="' . $tipe_soal . '" hidden>
 			<input type="text" name="tipe_sim" value="' . $tipe_sim . '" hidden>
         <div class="container my-5">
-            <h1>Stabilitas Emosi</h1>';
+            <h1>Kategori 1</h1>';
 
 		$i = 1;
 		foreach ($subtes1 as $sub1) {
@@ -457,7 +472,7 @@ class DashboardPengusulController extends CI_Controller
 			$i++;
 		}
 
-		$soal .= '<h1 class="mt-5">Pengendalian Diri</h1>';
+		$soal .= '<h1 class="mt-5">Kategori 2</h1>';
 		$i = 1;
 		foreach ($subtes2 as $sub2) {
 			$soal .= '
@@ -488,7 +503,7 @@ class DashboardPengusulController extends CI_Controller
 			$i++;
 		}
 
-		$soal .= '<h1 class="mt-5">Penyesuaian Diri</h1>';
+		$soal .= '<h1 class="mt-5">Kategori 3</h1>';
 		$i = 1;
 		foreach ($subtes3 as $sub3) {
 			$soal .= '
@@ -519,15 +534,22 @@ class DashboardPengusulController extends CI_Controller
 			$i++;
 		}
 
-		$soal .= '<h1 class="mt-5">Ketahanan</h1>';
+		$soal .= '<h1 class="mt-5">Kategori 4</h1>';
 
 		$i = 1;
 		foreach ($subtes4 as $sub4) {
 			$soal .= '<table class="table">
                     <tr>
                         <td width="2%">' .  $i . ". " . '</td>
-                        <td>' .  $sub4->pertanyaan . '</td>
-                    </tr>
+                        <td>' .  $sub4->pertanyaan;
+			if (($sub4->id == 13) && ($sub4->tipe == 'A') || ($sub4->id == 25) && ($sub4->tipe == 'B')) {
+				$soal .= '<a href="#" data-toggle="modal" data-target=".modalKategori4BagianA"><span class="badge badge-info shadow" style="display: inline">Contoh Cara Pengerjaan (Klik Disini)</span></a>';
+			} else if (($sub4->id == 23) && ($sub4->tipe == 'A') || ($sub4->id == 35) && ($sub4->tipe == 'B')) {
+				$soal .= '<a href="#" data-toggle="modal" data-target=".modalKategori4BagianC"><span class="badge badge-info shadow" style="display: inline">Contoh Cara Pengerjaan (Klik Disini)</span></a>';
+			}
+			'</td>';
+
+			$soal .= '</tr>
                 </table>
 
                 <table class="table borderless ">
@@ -555,7 +577,7 @@ class DashboardPengusulController extends CI_Controller
 			$i++;
 		}
 
-		$soal .= '<h1 class="mt-5">Kecermatan</h1>';
+		$soal .= '<h1 class="mt-5">Kategori 5</h1>';
 		$i = 1;
 		foreach ($subtes5 as $sub5) {
 			$soal .= '<table class="table">
@@ -590,14 +612,18 @@ class DashboardPengusulController extends CI_Controller
 			$i++;
 		}
 
-		$soal .= '<h1 class="mt-5">Konsentrasi</h1>';
+		$soal .= '<h1 class="mt-5">Kategori 6</h1>';
 		$i = 1;
 		foreach ($subtes6 as $sub6) {
 			$soal .= '<table class="table">
                     <tr>
                         <td width="2%">' . $i . ". " . '</td>
-                        <td>' . $sub6->pertanyaan . '</td>
-                    </tr>
+                        <td>' . $sub6->pertanyaan;
+			if (($sub6->id == 10) && ($sub6->tipe == 'A') || ($sub6->id == 17) && ($sub6->tipe == 'B')) {
+				$soal .= '<a href="#" data-toggle="modal" data-target=".modalKategori6"><span class="badge badge-info shadow" style="display: inline">Contoh Cara Pengerjaan (Klik Disini)</span></a>';
+			}
+			'</td>';
+			$soal .= '</tr>
                 </table>
 
                 <table class="table borderless ">

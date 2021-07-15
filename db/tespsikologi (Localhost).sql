@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Jun 2021 pada 17.06
+-- Waktu pembuatan: 15 Jul 2021 pada 09.50
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.3.28
 
@@ -31,6 +31,7 @@ CREATE TABLE `bank` (
   `id` int(11) NOT NULL,
   `nama_bank` varchar(100) NOT NULL,
   `no_rekening` varchar(100) NOT NULL,
+  `aktif` int(11) NOT NULL DEFAULT 0,
   `modified_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,11 +40,11 @@ CREATE TABLE `bank` (
 -- Dumping data untuk tabel `bank`
 --
 
-INSERT INTO `bank` (`id`, `nama_bank`, `no_rekening`, `modified_at`, `created_at`) VALUES
-(5, 'Mandiri', '0700 000 899 992', '2021-04-30 22:06:22', '2021-04-30 22:06:22'),
-(6, 'BCA', '731 025 2527', '2021-04-30 22:06:37', '2021-04-30 22:06:37'),
-(7, 'BNI', '023 827 2088', '2021-04-30 22:06:51', '2021-04-30 22:06:51'),
-(8, 'BRI', '034 101 000 743 303', '2021-04-30 22:07:04', '2021-04-30 22:07:04');
+INSERT INTO `bank` (`id`, `nama_bank`, `no_rekening`, `aktif`, `modified_at`, `created_at`) VALUES
+(5, 'Mandiri', '0700 000 899 992', 0, '2021-04-30 22:06:22', '2021-04-30 22:06:22'),
+(6, 'BCA', '731 025 2527', 0, '2021-04-30 22:06:37', '2021-04-30 22:06:37'),
+(7, 'BNI', '023 827 2088', 1, '2021-04-30 22:06:51', '2021-04-30 22:06:51'),
+(8, 'BRI', '034 101 000 743 303', 1, '2021-04-30 22:07:04', '2021-04-30 22:07:04');
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,9 @@ INSERT INTO `pengaturan` (`id`, `nama`, `nilai`, `modified_at`) VALUES
 (4, 'email', 'hidayahamirul103@gmail.com', '2021-04-29 16:14:01'),
 (5, 'facebook', 'amirulHidayah', '2021-04-29 16:14:01'),
 (6, 'instagram', 'amirulhidayah', '2021-04-29 16:14:16'),
-(7, 'standar_kelulusan', '51', '2021-04-30 22:50:52');
+(7, 'standar_kelulusan', '51', '2021-04-30 22:50:52'),
+(8, 'soal_a', '1', '2021-07-12 14:18:48'),
+(9, 'soal_b', '1', '2021-07-12 14:18:48');
 
 -- --------------------------------------------------------
 
@@ -101,9 +104,11 @@ CREATE TABLE `profil` (
 
 INSERT INTO `profil` (`id_user`, `nama_lengkap`, `nomor_ktp`, `tempat_lahir`, `tanggal_lahir`, `nomor_hp`, `email`, `alamat`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`, `foto_ktp`, `modified_at`, `created_at`) VALUES
 (19, 'admin', '2222222222222222', 'Parigi', '2021-04-15', 'admin', 'admin@gmail.com', 'parigi', 51, 5106, 5106020, '5106020003', '737d581be104f509a263c3832aa1a496.jpg', '2021-05-11 21:19:37', '2021-04-28 16:40:41'),
-(28, 'Amirul Hidayah', '1111111111111111', 'Parigi', '2021-05-12', '09213213213213', 'hidayahamirul103@gmail.com', 'assdasdasd', 51, 5103, 5103050, '5103050004', 'ebf5c4d4f1fafcdb505dab1d5c073ca0.png', '2021-05-19 22:02:48', '2021-05-19 22:02:48'),
+(28, 'Amirul Hidayah', '1111111111111111', 'Parigi', '2021-05-12', '09213213213213', 'hidayahamirul103@gmail.com', 'assdasdasd', 72, 5103, 5103050, '5103050004', 'ebf5c4d4f1fafcdb505dab1d5c073ca0.png', '2021-05-19 22:02:48', '2021-05-19 22:02:48'),
 (29, 'Moh. Arham Rahim', '9999999999999999', 'Palopo', '1997-09-07', '082292555577', 'moh.arham.rahim@gmail.com', 'Jl. Trans Sulawesi, Desa Bahonsuai, Kec.Bumi Raya, Kec.Morowali', 72, 7203, 7203041, '7203041003', '8e05869492cb222665ba53c71343e9d9.jpeg', '2021-06-01 22:52:56', '2021-06-01 22:52:56'),
-(30, 'Ilham', '8888888888888888', 'Palopo', '1997-09-07', '082292555577', 'moh.arham.rahim@gmail.com', 'Jl. Trans Sulawesi, Desa Bahonsuai, Kec.Bumi Raya, Kec.Morowali', 11, 1108, 1108110, '1108110046', '1c2ed97b43daeb24372ea1c8c4cbb504.jpg', '2021-06-06 18:04:39', '2021-06-06 18:04:39');
+(30, 'Ilham', '8888888888888888', 'Palopo', '1997-09-07', '082292555577', 'moh.arham.rahim@gmail.com', 'Jl. Trans Sulawesi, Desa Bahonsuai, Kec.Bumi Raya, Kec.Morowali', 11, 1108, 1108110, '1108110046', '1c2ed97b43daeb24372ea1c8c4cbb504.jpg', '2021-06-06 18:04:39', '2021-06-06 18:04:39'),
+(31, 'asdasdasdasdasdd', '1231231231231231', 'asdasdasdasd', '2010-02-01', '123123123123', '', 'sadasdasd', 51, 5106, 5106040, '5106040021', '658803acac991444ac47e834b02fb218.jpg', '2021-07-12 13:59:14', '2021-07-12 13:59:14'),
+(32, 'asdasdasdas', '1232131231231231', 'Parigi', '1970-01-01', '213231231232', 'asdasddasdas@gmail.com', 'asdasdasdasd', 17, 1704, 1704040, '1704040012', 'a068cf4761980e11574031e738352745.jpg', '2021-07-13 11:38:23', '2021-07-13 11:38:23');
 
 -- --------------------------------------------------------
 
@@ -139,9 +144,12 @@ CREATE TABLE `riwayat_ujian` (
 --
 
 INSERT INTO `riwayat_ujian` (`id`, `id_user`, `no_ujian`, `tipe_soal`, `jenis_sim`, `nilai_subtes1`, `nilai_subtes2`, `nilai_subtes3`, `nilai_subtes4`, `nilai_subtes5`, `nilai_subtes6`, `hasil`, `standar_kelulusan`, `status_hasil`, `biaya`, `status_bayar`, `alasan_ditolak`, `bukti_pembayaran`, `admin_id`, `created_at`) VALUES
-(16, '28', '29dx369', 'A', 'SIM A', '100', '100', '100', '100', '100', '86', '98', '51', 'Lulus', '50223', 'Sudah Bayar', '', 'd1bc5e8e4b57e637fa45b1a5707c4e6c.png', 19, '2021-05-19 22:04:56'),
-(17, '29', '2prb615', 'A', 'SIM C', '100', '100', '100', '100', '100', '100', '100', '51', 'Lulus', '50261', 'Sudah Bayar', '-', 'd6b61af3751b1d619047d92a265b8b6a.jpg', 19, '2021-06-03 20:51:56'),
-(19, '30', '41va184', 'A', 'SIM C', '100', '100', '100', '100', '100', '100', '100', '51', 'Lulus', '50409', 'Sudah Bayar', '-', 'e64a3e9dafa4d2d1c6c01be6051cdc8e.jpg', 19, '2021-06-09 15:28:55');
+(30, '28', 'htvr296', 'A', 'SIM B1 UMUM', '100', '100', '100', '25', '60', '29', '69', '51', 'Lulus', '170270', 'Belum Bayar', '-', NULL, NULL, '2021-07-12 20:18:04'),
+(31, '28', 'fwxr287', 'A', 'SIM INTERNASIONAL', '100', '100', '100', '25', '60', '29', '69', '51', 'Lulus', '260379', 'Belum Bayar', '-', NULL, NULL, '2021-07-12 20:20:46'),
+(32, '32', 'lk8g812', 'A', 'SIM C', '100', '100', '100', '25', '60', '29', '69', '51', 'Lulus', '70205', 'Belum Bayar', '-', '3efd4e59b28e3f8a4bbcdc5652a9556e.jpg', NULL, '2021-07-13 11:40:39'),
+(33, '29', 'oodg315', 'A', 'SIM C', '100', '100', '100', '25', '60', '29', '69', '51', 'Lulus', '260270', 'Sudah Bayar', '-', '42cffb23365cb0ebbff98db5fa04de87.png', 19, '2021-07-13 16:51:47'),
+(34, '29', 'vg5l314', 'B', 'SIM B2', '100', '100', '100', '25', '20', '29', '62', '51', 'Lulus', '260471', 'Sudah Bayar', '-', '5bc23e491693aa6845ec29332fe483c5.jpg', 19, '2021-07-13 17:21:58'),
+(35, '29', 'jnre761', 'A', 'SIM A', '100', '100', '100', '25', '60', '29', '69', '51', 'Lulus', '260227', 'Belum Bayar', '-', NULL, NULL, '2021-07-15 13:05:09');
 
 -- --------------------------------------------------------
 
@@ -164,9 +172,8 @@ CREATE TABLE `sertifikat` (
 --
 
 INSERT INTO `sertifikat` (`id`, `id_sertifikat`, `nomor_sertifikat`, `id_riwayat_ujian`, `id_user`, `berakhir`, `created_at`) VALUES
-(10, '2gian45081', '00001/BIPI-SNG/VI/2021', '16', '28', '2021-06-18', '2021-05-19 22:07:08'),
-(11, '2yrj896550', '00002/BIPI-SNG/VI/2021', '17', '29', '2021-07-03', '2021-06-03 21:15:45'),
-(26, 'np6x830559', '00003/BIPI-SNG/VI/2021', '19', '30', '2021-12-06', '2021-06-09 15:44:26');
+(27, 'sc7g335278', '00001/BAPI-SIM/VII/2021', '33', '29', '2022-01-09', '2021-07-13 16:56:33'),
+(28, '2mb6k20769', '00002/SNG-SIM/VII/2021', '34', '29', '2022-01-09', '2021-07-13 17:22:22');
 
 -- --------------------------------------------------------
 
@@ -449,7 +456,9 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`, `modified_at`, `create
 (19, '0000000000000000', 'admin', 'admin', '2021-04-28 16:40:41', '2021-04-28 16:40:41'),
 (28, '1111111111111111', 'amirulhidayah', 'pengusul', '2021-05-19 22:02:48', '2021-05-19 22:02:48'),
 (29, '9999999999999999', '07S3p1997', 'pengusul', '2021-06-01 22:52:56', '2021-06-01 22:52:56'),
-(30, '8888888888888888', 'ilham', 'pengusul', '2021-06-06 18:04:39', '2021-06-06 18:04:39');
+(30, '8888888888888888', 'ilham', 'pengusul', '2021-06-06 18:04:39', '2021-06-06 18:04:39'),
+(31, '1231231231231231', 'asdaszxcxzasdsad', 'pengusul', '2021-07-12 13:59:14', '2021-07-12 13:59:14'),
+(32, '1232131231231231', 'asdaszxczxc', 'pengusul', '2021-07-13 11:38:23', '2021-07-13 11:38:23');
 
 -- --------------------------------------------------------
 
@@ -87657,48 +87666,49 @@ INSERT INTO `wilayah_kecamatan` (`id`, `kabupaten_id`, `nama`) VALUES
 
 CREATE TABLE `wilayah_provinsi` (
   `id` varchar(2) NOT NULL,
-  `nama` varchar(30) NOT NULL
+  `nama` varchar(30) NOT NULL,
+  `biaya` varchar(200) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `wilayah_provinsi`
 --
 
-INSERT INTO `wilayah_provinsi` (`id`, `nama`) VALUES
-('11', 'Aceh'),
-('12', 'Sumatera Utara'),
-('13', 'Sumatera Barat'),
-('14', 'Riau'),
-('15', 'Jambi'),
-('16', 'Sumatera Selatan'),
-('17', 'Bengkulu'),
-('18', 'Lampung'),
-('19', 'Kepulauan Bangka Belitung'),
-('21', 'Kepulauan Riau'),
-('31', 'Dki Jakarta'),
-('32', 'Jawa Barat'),
-('33', 'Jawa Tengah'),
-('34', 'Di Yogyakarta'),
-('35', 'Jawa Timur'),
-('36', 'Banten'),
-('51', 'Bali'),
-('52', 'Nusa Tenggara Barat'),
-('53', 'Nusa Tenggara Timur'),
-('61', 'Kalimantan Barat'),
-('62', 'Kalimantan Tengah'),
-('63', 'Kalimantan Selatan'),
-('64', 'Kalimantan Timur'),
-('65', 'Kalimantan Utara'),
-('71', 'Sulawesi Utara'),
-('72', 'Sulawesi Tengah'),
-('73', 'Sulawesi Selatan'),
-('74', 'Sulawesi Tenggara'),
-('75', 'Gorontalo'),
-('76', 'Sulawesi Barat'),
-('81', 'Maluku'),
-('82', 'Maluku Utara'),
-('91', 'Papua Barat'),
-('94', 'Papua');
+INSERT INTO `wilayah_provinsi` (`id`, `nama`, `biaya`) VALUES
+('11', 'Aceh', '15000'),
+('12', 'Sumatera Utara', '20000'),
+('13', 'Sumatera Barat', '30000'),
+('14', 'Riau', '40000'),
+('15', 'Jambi', '50000'),
+('16', 'Sumatera Selatan', '60000'),
+('17', 'Bengkulu', '70000'),
+('18', 'Lampung', '80000'),
+('19', 'Kepulauan Bangka Belitung', '90000'),
+('21', 'Kepulauan Riau', '150000'),
+('31', 'Dki Jakarta', '110000'),
+('32', 'Jawa Barat', '120000'),
+('33', 'Jawa Tengah', '130000'),
+('34', 'Di Yogyakarta', '140000'),
+('35', 'Jawa Timur', '150000'),
+('36', 'Banten', '160000'),
+('51', 'Bali', '170000'),
+('52', 'Nusa Tenggara Barat', '180000'),
+('53', 'Nusa Tenggara Timur', '190000'),
+('61', 'Kalimantan Barat', '200000'),
+('62', 'Kalimantan Tengah', '210000'),
+('63', 'Kalimantan Selatan', '220000'),
+('64', 'Kalimantan Timur', '230000'),
+('65', 'Kalimantan Utara', '240000'),
+('71', 'Sulawesi Utara', '250000'),
+('72', 'Sulawesi Tengah', '260000'),
+('73', 'Sulawesi Selatan', '270000'),
+('74', 'Sulawesi Tenggara', '280000'),
+('75', 'Gorontalo', '290000'),
+('76', 'Sulawesi Barat', '300000'),
+('81', 'Maluku', '310000'),
+('82', 'Maluku Utara', '320000'),
+('91', 'Papua Barat', '330000'),
+('94', 'Papua', '340000');
 
 --
 -- Indexes for dumped tables
@@ -87814,19 +87824,19 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT untuk tabel `pengaturan`
 --
 ALTER TABLE `pengaturan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `riwayat_ujian`
 --
 ALTER TABLE `riwayat_ujian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `subtes1`
@@ -87868,7 +87878,7 @@ ALTER TABLE `subtes6`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -188,6 +188,10 @@
 						<p style="display: inline;">Status Bayar :</p>
 						<strong style="float: right;" id="status_bayar"></strong>
 					</li>
+					<li class="list-group-item px-2" style="display: none;" id="aksi_bayar">
+						<p style="display: inline;">Bayar :</p>
+						<strong style="float: right;"><a href="<?= base_url('bayar') ?>"><span class="btn btn-sm btn-success">Bayar</span></a></strong>
+					</li>
 
 					<li class="list-group-item px-2" id="alasan_ditolak2" style="display: none;">
 						<p style="display: inline;">Alasan Ditolak :</p>

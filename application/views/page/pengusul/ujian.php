@@ -77,14 +77,18 @@
 					</div>
 					<div class="card-body py-4">
 						<div class="form-group mb-3">
-							<div class="custom-control custom-radio">
-								<input class="custom-control-input custom-control-input-danger paket" type="radio" id="customRadio20" name="paket" value="A">
-								<label for="customRadio20" class="custom-control-label">Paket A</label>
-							</div>
-							<div class="custom-control custom-radio">
-								<input class="custom-control-input custom-control-input-danger paket" type="radio" id="customRadio21" name="paket" value="B">
-								<label for="customRadio21" class="custom-control-label">Paket B</label>
-							</div>
+							<?php if ($blokirSoalA == 1) { ?>
+								<div class="custom-control custom-radio">
+									<input class="custom-control-input custom-control-input-danger paket" type="radio" id="customRadio20" name="paket" value="A">
+									<label for="customRadio20" class="custom-control-label">Paket A</label>
+								</div>
+							<?php } ?>
+							<?php if ($blokirSoalB == 1) { ?>
+								<div class="custom-control custom-radio">
+									<input class="custom-control-input custom-control-input-danger paket" type="radio" id="customRadio21" name="paket" value="B">
+									<label for="customRadio21" class="custom-control-label">Paket B</label>
+								</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -114,3 +118,61 @@
 		</div>
 	</div>
 </section>
+
+<!-- Modal Contoh Pengerjaan Soal -->
+<div class="modal fade modalKategori4BagianA" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Contoh Pengerjaan Soal Kategori 4 Bagian A</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<img class="mx-auto d-block" src="<?= base_url('./assets/pengusul/img/kategori4bagiana.png') ?>" style="width: 100%; ">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modalKategori4BagianC" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Contoh Pengerjaan Soal Kategori 4 Bagian C</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<img class="mx-auto d-block" src="<?= base_url('./assets/pengusul/img/kategori4bagianc.png') ?>" style="width: 100%; ">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade modalKategori6" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Contoh Pengerjaan Soal Kategori 6</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<img class="mx-auto d-block" src="<?= base_url('./assets/pengusul/img/kategori6.png') ?>" style="width: 100%; ">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button>
+			</div>
+		</div>
+	</div>
+</div>

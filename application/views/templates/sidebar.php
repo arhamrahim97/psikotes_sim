@@ -71,6 +71,7 @@
 				<a class="collapse-item" href="<?= base_url('subtes5') ?>" id="sub-subtes5">Kecermatan</a>
 				<a class="collapse-item" href="<?= base_url('subtes6') ?>" id="sub-subtes6">Konsentrasi</a>
 				<a class="collapse-item" href="<?= base_url('standarKelulusan') ?>" id="standar-kelulusan">Standar Kelulusan</a>
+				<a class="collapse-item" href="<?= base_url('pengaturanSoal') ?>" id="pengaturan-soal">Pengaturan Soal</a>
 			</div>
 		</div>
 	</li>

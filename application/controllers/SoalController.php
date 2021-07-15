@@ -917,4 +917,47 @@ class SoalController extends CI_Controller
 			echo "false";
 		}
 	}
+
+	public function pengaturanSoal()
+	{
+		$data['judul'] = 'Pengaturan Soal';
+		$data['blokirSoalA'] = $this->db->where('id', 8)->get('pengaturan')->row()->nilai;
+		$data['blokirSoalB'] = $this->db->where('id', 9)->get('pengaturan')->row()->nilai;
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar');
+		$this->load->view('page/admin/soal/pengaturan');
+		$this->load->view('templates/footer');
+	}
+
+	public function updateBlokirSoalA()
+	{
+		$checkedSoalA = $this->input->post('checkedSoalA');
+		$set_soal_a = null;
+		if ($checkedSoalA == 'false') {
+			$set_soal_a = 0;
+		} else if ($checkedSoalA == 'true') {
+			$set_soal_a = 1;
+		}
+		$data = [
+			'nilai' => $set_soal_a
+		];
+		$this->db->where('id', 8);
+		$this->db->update('pengaturan', $data);
+	}
+
+	public function updateBlokirSoalB()
+	{
+		$checkedSoalB = $this->input->post('checkedSoalB');
+		$set_soal_b = null;
+		if ($checkedSoalB == 'false') {
+			$set_soal_b = 0;
+		} else if ($checkedSoalB == 'true') {
+			$set_soal_b = 1;
+		}
+		$data = [
+			'nilai' => $set_soal_b
+		];
+		$this->db->where('id', 9);
+		$this->db->update('pengaturan', $data);
+	}
 }
