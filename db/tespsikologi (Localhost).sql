@@ -133,7 +133,7 @@ CREATE TABLE `riwayat_ujian` (
   `status_hasil` varchar(50) NOT NULL,
   `biaya` varchar(50) NOT NULL,
   `status_bayar` varchar(50) NOT NULL,
-  `alasan_ditolak` text DEFAULT '-',
+  `alasan_ditolak` text DEFAULT NULL,
   `bukti_pembayaran` text DEFAULT NULL,
   `admin_id` int(10) DEFAULT NULL,
   `created_at` datetime NOT NULL
